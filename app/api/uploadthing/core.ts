@@ -11,7 +11,7 @@ const handleAuth = () => {
 }
 
 export const ourFileRouter = {
-  courseImage: f({ image: { maxFileSize: '4MB', maxFileCount: 1 } })
+  courseImage: f({ image: { maxFileSize: '16MB', maxFileCount: 1 } })
     .middleware(() => handleAuth())
     .onUploadError(async error => {
       console.error('[UPLOADTHING]', error)

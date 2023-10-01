@@ -6,6 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 
 import { ToastProvider } from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers/confetti-provider'
+import { NProgressBarProvider } from '@/components/providers/nprogress-bar-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <ToastProvider />
           <ConfettiProvider />
+          <NProgressBarProvider />
 
           {children}
         </body>
