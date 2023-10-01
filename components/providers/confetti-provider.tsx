@@ -14,7 +14,7 @@ export const ConfettiProvider = () => {
       recycle={false}
       numberOfPieces={500}
       onConfettiComplete={onClose}
-      className="z-[100] pointer-events-none"
+      className="z-[100] pointer-events-none w-full"
     />
   )
 }

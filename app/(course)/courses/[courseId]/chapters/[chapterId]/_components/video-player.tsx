@@ -30,8 +30,41 @@ export const VideoPlayer = ({
   nextChapterId,
 }: VideoPlayerProps) => {
   const router = useRouter()
-
+  const { onOpen } = useConfettiStore()
   const [isReady, setIsReady] = useState(false)
+
+  const onEnded = async () => {
+    try {
+      toast.loading('Updating progress...', {
+        id: 'progress-toast',
+      })
+
+      if (completeOnEnd) {
+        await axios.put(
+          `/api/courses/${courseId}/chapters/${chapterId}/progress`,
+          {
+            isCompleted: true,
+          },
+        )
+      }
+
+      if (!nextChapterId) {
+        toast.success('Course completed!')
+        onOpen()
+      }
+
+      toast.success('Progress updated')
+      router.refresh()
+
+      if (nextChapterId) {
+        router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
+      }
+    } catch (error) {
+      toast.error('Something went wrong')
+    } finally {
+      toast.dismiss('progress-toast')
+    }
+  }
 
   return (
     <div className="relative aspect-video">
@@ -52,7 +85,7 @@ export const VideoPlayer = ({
         <MuxPlayer
           autoPlay
           title={title}
-          onEnded={() => {}}
+          onEnded={onEnded}
           playbackId={playbackId}
           onCanPlay={() => setIsReady(true)}
           className={cn(!isReady && 'hidden')}

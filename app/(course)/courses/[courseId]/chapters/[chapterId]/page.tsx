@@ -8,6 +8,7 @@ import { getChapter } from '@/actions/get-chapter'
 import { Separator } from '@/components/ui/separator'
 import { VideoPlayer } from './_components/video-player'
 import { CurseEnrollButton } from './_components/curse-enroll-button'
+import { CourseProgressButton } from './_components/course-progress-button'
 
 export default async function ChapterIdPage({
   params,
@@ -75,7 +76,12 @@ export default async function ChapterIdPage({
             <h2 className="mb-2 text-2xl font-semibold">{chapter.title}</h2>
 
             {purchase ? (
-              <div>{/* TODO: Add CourseProgressButton */}</div>
+              <CourseProgressButton
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+                nextChapterId={nextChapter?.id}
+                isCompleted={!!userProgress?.isCompleted}
+              />
             ) : (
               <CurseEnrollButton
                 price={course.price!}
