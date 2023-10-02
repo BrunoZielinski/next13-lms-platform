@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 
 import { db } from '@/lib/db'
+import { isTeacher } from '@/lib/teacher'
 
 export async function PATCH(
   req: Request,
@@ -11,7 +12,7 @@ export async function PATCH(
     const { userId } = auth()
     const { courseId, chapterId } = params
 
-    if (!userId) {
+    if (!userId || !isTeacher(userId)) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 

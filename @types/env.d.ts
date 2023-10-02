@@ -9,6 +9,7 @@ declare namespace NodeJS {
     UPLOADTHING_APP_ID: string
     NEXT_PUBLIC_APP_URL: string
     STRIPE_WEBHOOK_SECRET: string
+    NEXT_PUBLIC_TEACHER_ID: string
     STRIPE_PUBLISHABLE_KEY: string
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: string
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: string
